@@ -1,20 +1,34 @@
 import React from 'react';
-import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
+import InventoryManager from '../Components/InventoryManager';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const logout = async () => {
     await auth.signOut();
     navigate('/login');
   };
 
+  if (!user) {
+    return <p>Loading user...</p>;
+  }
+
   return (
     <div className="dash">
-      <h2>Client Dashboard</h2>
-      <p>Welcome, you're logged in as a client.</p>
+      <h2>Dashboard</h2>
+      <p>Welcome, you're logged in as <strong>{user.email}</strong></p>
+      <p>Your role: <strong>{user.role}</strong></p>
       <button onClick={logout}>Logout</button>
+
+      {user.role === 'admin' ? (
+        <InventoryManager />
+      ) : (
+        <p>You do not have access to inventory management.</p>
+      )}
     </div>
   );
 };

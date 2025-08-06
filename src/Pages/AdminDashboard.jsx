@@ -1,5 +1,8 @@
+import React from 'react';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import AdminPage from './AdminPage';
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
@@ -11,7 +14,7 @@ const AdminDashboard = () => {
   return (
     <div className="dash">
       <h2>Admin Dashboard</h2>
-      <p>You are logged in as an Admin.</p>
+      <AdminPage />
       <button onClick={logout}>Logout</button>
     </div>
   );
