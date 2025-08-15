@@ -34,7 +34,7 @@ export default function InventoryManager() {
           icon: "warning",
           title: "Low Stock Alert!",
           html: lowStockItems
-            .map((item) => ⁠ <b>${item.name}</b> (Qty: ${item.quantity}) ⁠)
+            .map((item) => ⁠`<b>${item.name}</b> (Qty: ${item.quantity})`⁠)
             .join("<br>"),
           confirmButtonText: "OK",
           confirmButtonColor: "#f97316",
@@ -145,7 +145,7 @@ export default function InventoryManager() {
                   <td className="border p-2">{item.sku}</td>
                   <td className="border p-2">{item.category}</td>
                   <td className="border p-2">₹{item.price}</td>
-                  <td className={⁠ border p-2 ${item.quantity <= (item.lowStockThreshold || 5) ? "text-red-500 font-bold" : ""} ⁠}>
+                  <td className={⁠`border p-2 ${item.quantity <= (item.lowStockThreshold || 5) ? "text-red-500 font-bold" : ""}`}>
                     {item.quantity}
                     {item.quantity <= (item.lowStockThreshold || 5) && " ⚠"}
                   </td>
